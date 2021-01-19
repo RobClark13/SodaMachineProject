@@ -20,7 +20,22 @@ namespace SodaMachine
         //Fills wallet with starting money
         private void FillRegister()
         {
-          
+            for (int i = 0; i < 8; i++)
+            {
+                Coins.Add(new Quarter());
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Coins.Add(new Dime());
+            }
+            for (int i = 0; i < 18; i++)
+            {
+                Coins.Add(new Nickel());
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Coins.Add(new Penny());
+            }
         }
     }
 }

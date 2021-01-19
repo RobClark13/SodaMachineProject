@@ -26,12 +26,39 @@ namespace SodaMachine
         //A method to fill the sodamachines register with coin objects.
         public void FillRegister()
         {
-           
+            for (int i = 0; i < 20; i++)
+            {
+                _register.Add(new Quarter());
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                _register.Add(new Dime());
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                _register.Add(new Nickel());
+            }
+            for (int i = 0; i < 50; i++)
+            {
+                _register.Add(new Penny());
+            }
+            
         }
         //A method to fill the sodamachines inventory with soda can objects.
         public void FillInventory()
         {
-            
+            for (int i = 0; i < 5; i++)
+            {
+                _inventory.Add(new Cola());
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                _inventory.Add(new RootBeer());
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                _inventory.Add(new OrangeSoda());
+            }
         }
         //Method to be called to start a transaction.
         //Takes in a customer which can be passed freely to which ever method needs it.

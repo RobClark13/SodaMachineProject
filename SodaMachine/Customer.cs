@@ -26,6 +26,7 @@ namespace SodaMachine
         //When all is said and done this method will return a list of coin objects that the customer will use a payment for their soda.
         public List<Coin> GatherCoinsFromWallet(Can selectedCan)
         {
+            List<Coin> getCoins = new List<Coin>();
           
         }
         //Returns a coin object from the wallet based on the name passed into it.
