@@ -27,18 +27,21 @@ namespace SodaMachine
         public List<Coin> GatherCoinsFromWallet(Can selectedCan)
         {
             List<Coin> gatherCoins = new List<Coin>();
+            return gatherCoins;
           
         }
         //Returns a coin object from the wallet based on the name passed into it.
         //Returns null if no coin can be found
         public Coin GetCoinFromWallet(string coinName)
         {
-            List<Coin> getCoins = new List<Coin>();
+            
+            return null;
         }
         //Takes in a list of coin objects to add into the customers wallet.
         public void AddCoinsIntoWallet(List<Coin> coinsToAdd)
         {
             List<Coin> addCoins = new List<Coin>();
+            
         }
         //Takes in a can object to add to the customers backpack.
         public void AddCanToBackpack(Can purchasedCan)

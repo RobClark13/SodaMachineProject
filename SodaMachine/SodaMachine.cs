@@ -117,20 +117,60 @@ namespace SodaMachine
         //Attempts to gather all the required coins from the sodamachine's register to make change.
         //Returns the list of coins as change to despense.
         //If the change cannot be made, return null.
-        private List<Coin> GatherChange(double changeValue)
+        public List<Coin> GatherChange(double changeValue)
         {
-            
+            List<Coin> changeToReturn = new List<Coin>();
+            Coin quarter = new Quarter();
+            Coin dime = new Dime();
+            Coin nickel = new Nickel();
+            Coin penny = new Penny();
+            while (changeValue > 0.01)
+            {
+                if (changeValue >= .25 && RegisterHasCoin("Quarter"))
+                {
+                    GetCoinFromRegister("Quarter");
+                    changeToReturn.Add(quarter);
+                    changeValue -= .25;
+                }
+                else if (changeValue >= .10 && RegisterHasCoin("Dime"))
+                {
+                    GetCoinFromRegister("Dime");
+                    changeToReturn.Add(dime);
+                    changeValue -= .10;
+                }
+                else if (changeValue >= .05 && RegisterHasCoin("Nickel"))
+                {
+                    GetCoinFromRegister("Nickel");
+                    changeToReturn.Add(nickel);
+                    changeValue -= .05;
+                }
+                else if (changeValue >= .01 && RegisterHasCoin("Penny"))
+                {
+                    GetCoinFromRegister("Penny");
+                    changeToReturn.Add(penny);
+                    changeValue -= .01;
+                }              
+            }
+            if (changeValue == 0)
+            {                              
+                return changeToReturn;                
+            }
+            else
+            {
+                return null;
+            }
         }
         //Reusable method to check if the register has a coin of that name.
         //If it does have one, return true.  Else, false.
         private bool RegisterHasCoin(string name)
         {
-           foreach (Coin coin in _register)
+            foreach (Coin coin in _register)
             {
                 if (coin.Name == name)
                 {
                     return true;
                 }
+                                           
             }
             return false;
         }
