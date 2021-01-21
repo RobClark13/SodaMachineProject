@@ -27,8 +27,41 @@ namespace SodaMachine
         public List<Coin> GatherCoinsFromWallet(Can selectedCan)
         {
             List<Coin> gatherCoins = new List<Coin>();
+            double gatherCoinsValue = 0;
+            string chosenCoin;
+            while(gatherCoinsValue < selectedCan.Price)
+            {
+                chosenCoin = UserInterface.CoinSelection(selectedCan, gatherCoins);
+                if (chosenCoin == "Quarter")
+                {
+                    Coin quarter = GetCoinFromWallet("Quarter");
+                    gatherCoins.Add(quarter);
+                    gatherCoinsValue += quarter.Value;
+                }
+                else if (chosenCoin == "Dime")
+                {
+                    Coin dime = GetCoinFromWallet("Dime");
+                    gatherCoins.Add(dime);
+                    gatherCoinsValue += dime.Value;
+                }
+                else if (chosenCoin == "Nickel")
+                {
+                    Coin nickel = GetCoinFromWallet("Nickel");
+                    gatherCoins.Add(nickel);
+                    gatherCoinsValue += nickel.Value;
+                }
+                else if (chosenCoin == "Penny")
+                {
+                    Coin penny = GetCoinFromWallet("Penny");
+                    gatherCoins.Add(penny);
+                    gatherCoinsValue += penny.Value;
+                }
+                else
+                {
+                    gatherCoins = null;
+                }
+            }
             return gatherCoins;
-          
         }
         //Returns a coin object from the wallet based on the name passed into it.
         //Returns null if no coin can be found
