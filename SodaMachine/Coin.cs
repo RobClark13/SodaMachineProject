@@ -18,8 +18,6 @@ namespace SodaMachine
             {
                 return value;
             }
-
-
         }
         //Constructor (Spawner)
 

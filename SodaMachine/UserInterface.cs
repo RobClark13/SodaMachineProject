@@ -25,7 +25,6 @@ namespace SodaMachine
                 OutputText("Please step aside to allow another customer to make a selection");
                 return false;
             }
-        
         }
         //For printing out an error message for user to see.  Has built in console clear
         public static void DisplayError(string error)
@@ -101,7 +100,6 @@ namespace SodaMachine
                 }
             }
             return UniqueCans;
-
         }
         //Takes in a list of sodas to print.
         public static void PrintOptions(List<Can> SodaOptions)
@@ -131,7 +129,6 @@ namespace SodaMachine
             } while (!validatedSodaSelection.Item1);
 
             return validatedSodaSelection.Item2;
-           
         }
         //Uses a tuple to validate the soda selection.
         private static Tuple<bool,string> ValidateSodaSelection(int input, List<Can> uniqueCans)

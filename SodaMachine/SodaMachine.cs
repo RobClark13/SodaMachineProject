@@ -42,7 +42,6 @@ namespace SodaMachine
             {
                 _register.Add(new Penny());
             }
-            
         }
         //A method to fill the sodamachines inventory with soda can objects.
         public void FillInventory()
@@ -126,7 +125,7 @@ namespace SodaMachine
                 DepositCoinsIntoRegister(payment);
                 double changeValue = DetermineChange(paymentValue, chosenSoda.Price);
                 List<Coin> changeToReturn = GatherChange(changeValue);
-                UserInterface.EndMessage(chosenSoda.Name, changeValue);
+                
                 if(changeToReturn == null)
                 {
                     customer.AddCoinsIntoWallet(payment);
@@ -134,6 +133,7 @@ namespace SodaMachine
                 }
                 else
                 {
+                UserInterface.EndMessage(chosenSoda.Name, changeValue);
                 customer.AddCoinsIntoWallet(changeToReturn);
                   
                 customer.AddCanToBackpack(chosenSoda);
@@ -147,36 +147,40 @@ namespace SodaMachine
         public List<Coin> GatherChange(double changeValue)
         {
             List<Coin> changeToReturn = new List<Coin>();
-            Coin quarter = new Quarter();
-            Coin dime = new Dime();
-            Coin nickel = new Nickel();
-            Coin penny = new Penny();
+            Coin quarter;
+            Coin dime;
+            Coin nickel;
+            Coin penny;
             while (changeValue >= 0.01)
             {
                 if (changeValue >= .25 && RegisterHasCoin("Quarter"))
                 {
-                    GetCoinFromRegister("Quarter");
+                    quarter = GetCoinFromRegister("Quarter");
                     changeToReturn.Add(quarter);
                     changeValue -= .25;
                 }
                 else if (changeValue >= .10 && RegisterHasCoin("Dime"))
                 {
-                    GetCoinFromRegister("Dime");
+                    dime = GetCoinFromRegister("Dime");
                     changeToReturn.Add(dime);
                     changeValue -= .10;
                 }
                 else if (changeValue >= .05 && RegisterHasCoin("Nickel"))
                 {
-                    GetCoinFromRegister("Nickel");
+                    nickel = GetCoinFromRegister("Nickel");
                     changeToReturn.Add(nickel);
                     changeValue -= .05;
                 }
                 else if (changeValue >= .01 && RegisterHasCoin("Penny"))
                 {
-                    GetCoinFromRegister("Penny");
+                    penny = GetCoinFromRegister("Penny");
                     changeToReturn.Add(penny);
                     changeValue -= .01;
-                }              
+                }
+                else
+                {
+                    break;
+                }
             }
             if (changeValue <= .01)
             {
@@ -184,6 +188,7 @@ namespace SodaMachine
             }
             else
             {
+                DepositCoinsIntoRegister(changeToReturn);
                 return null;
             }
         }

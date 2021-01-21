@@ -56,9 +56,13 @@ namespace SodaMachine
                     gatherCoins.Add(penny);
                     gatherCoinsValue += penny.Value;
                 }
-                else 
+                //else if ()
+                //{
+                //    UserInterface.DisplayError("Selected Coin not available. Please enter a different coin");
+                //}
+                else
                 {
-                    UserInterface.DisplayError("Selected Coin not available. Please enter a different coin");
+                    break;
                 }
             }
             return gatherCoins;
