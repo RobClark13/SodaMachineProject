@@ -108,10 +108,34 @@ namespace SodaMachine
         //If the payment does not meet the cost of the soda: dispense payment back to the customer.
         private void CalculateTransaction(List<Coin> payment, Can chosenSoda, Customer customer)
         {
-           
+            double paymentValue = TotalCoinValue(payment);
 
-
-
+            if (paymentValue < chosenSoda.Price)
+            {
+                UserInterface.DisplayError("Not enough money to pay for soda");
+                customer.AddCoinsIntoWallet(payment);
+            }
+            else if (paymentValue == chosenSoda.Price)
+            {
+                DepositCoinsIntoRegister(payment);
+                customer.AddCanToBackpack(chosenSoda);
+            }
+            else if (paymentValue > chosenSoda.Price)
+            {
+                DepositCoinsIntoRegister(payment);
+                double changeValue = DetermineChange(paymentValue, chosenSoda.Price);
+                List<Coin> changeToReturn = GatherChange(changeValue);
+                if(changeToReturn == null)
+                {
+                    customer.AddCoinsIntoWallet(payment);
+                    UserInterface.DisplayError("Not enough change remaining in machine");
+                }
+                else
+                {
+                customer.AddCoinsIntoWallet(changeToReturn);
+                customer.AddCanToBackpack(chosenSoda);
+                }
+            }
         }
         //Takes in the value of the amount of change needed.
         //Attempts to gather all the required coins from the sodamachine's register to make change.
@@ -124,7 +148,7 @@ namespace SodaMachine
             Coin dime = new Dime();
             Coin nickel = new Nickel();
             Coin penny = new Penny();
-            while (changeValue > 0.01)
+            while (changeValue >= 0.01)
             {
                 if (changeValue >= .25 && RegisterHasCoin("Quarter"))
                 {
@@ -151,9 +175,9 @@ namespace SodaMachine
                     changeValue -= .01;
                 }              
             }
-            if (changeValue == 0)
-            {                              
-                return changeToReturn;                
+            if (changeValue <= .01)
+            {
+               return changeToReturn;                
             }
             else
             {
@@ -169,8 +193,7 @@ namespace SodaMachine
                 if (coin.Name == name)
                 {
                     return true;
-                }
-                                           
+                }                        
             }
             return false;
         }

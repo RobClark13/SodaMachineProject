@@ -34,7 +34,7 @@ namespace SodaMachine
         //Returns null if no coin can be found
         public Coin GetCoinFromWallet(string coinName)
         {
-            
+            //Wallet.Coins();
             return null;
         }
         //Takes in a list of coin objects to add into the customers wallet.
