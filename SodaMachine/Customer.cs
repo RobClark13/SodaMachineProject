@@ -34,19 +34,28 @@ namespace SodaMachine
         //Returns null if no coin can be found
         public Coin GetCoinFromWallet(string coinName)
         {
-            //Wallet.Coins();
+            foreach (Coin coin in Wallet.Coins)
+            {
+                if (coin.Name == coinName)
+                {
+                    Wallet.Coins.Remove(coin);
+                    return coin;
+                }
+            }
             return null;
         }
         //Takes in a list of coin objects to add into the customers wallet.
         public void AddCoinsIntoWallet(List<Coin> coinsToAdd)
         {
-            List<Coin> addCoins = new List<Coin>();
-            
+            foreach(Coin coin in coinsToAdd)
+            {
+                Wallet.Coins.Add(coin);
+            }
         }
         //Takes in a can object to add to the customers backpack.
         public void AddCanToBackpack(Can purchasedCan)
         {
-            
+            Backpack.cans.Add(purchasedCan);  
         }
     }
 }
