@@ -32,33 +32,33 @@ namespace SodaMachine
             while(gatherCoinsValue < selectedCan.Price)
             {
                 chosenCoin = UserInterface.CoinSelection(selectedCan, gatherCoins);
-                if (chosenCoin == "Quarter")
+                if (chosenCoin == "Quarter" && GetCoinFromWallet("Quarter") != null)
                 {
                     Coin quarter = GetCoinFromWallet("Quarter");
                     gatherCoins.Add(quarter);
                     gatherCoinsValue += quarter.Value;
                 }
-                else if (chosenCoin == "Dime")
+                else if (chosenCoin == "Dime" && GetCoinFromWallet("Dime") != null)
                 {
                     Coin dime = GetCoinFromWallet("Dime");
                     gatherCoins.Add(dime);
                     gatherCoinsValue += dime.Value;
                 }
-                else if (chosenCoin == "Nickel")
+                else if (chosenCoin == "Nickel" && GetCoinFromWallet("Nickel") != null)
                 {
                     Coin nickel = GetCoinFromWallet("Nickel");
                     gatherCoins.Add(nickel);
                     gatherCoinsValue += nickel.Value;
                 }
-                else if (chosenCoin == "Penny")
+                else if (chosenCoin == "Penny" && GetCoinFromWallet("Penny") != null)
                 {
                     Coin penny = GetCoinFromWallet("Penny");
                     gatherCoins.Add(penny);
                     gatherCoinsValue += penny.Value;
                 }
-                else
+                else 
                 {
-                    break;
+                    UserInterface.DisplayError("Selected Coin not available. Please enter a different coin");
                 }
             }
             return gatherCoins;
