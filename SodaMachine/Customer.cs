@@ -58,7 +58,7 @@ namespace SodaMachine
                 }
                 else
                 {
-                    gatherCoins = null;
+                    break;
                 }
             }
             return gatherCoins;

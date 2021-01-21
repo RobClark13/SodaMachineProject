@@ -77,10 +77,10 @@ namespace SodaMachine
         //pass payment to the calculate transaction method to finish up the transaction based on the results.
         private void Transaction(Customer customer)
         {
-           
-
-
-
+            string sodaChoice = UserInterface.SodaSelection(_inventory);
+            Can canChosen = GetSodaFromInventory(sodaChoice);
+            List<Coin> payment = customer.GatherCoinsFromWallet(canChosen);
+            CalculateTransaction(payment, canChosen, customer);
         }
         //Gets a soda from the inventory based on the name of the soda.
         private Can GetSodaFromInventory(string nameOfSoda)
@@ -119,12 +119,14 @@ namespace SodaMachine
             {
                 DepositCoinsIntoRegister(payment);
                 customer.AddCanToBackpack(chosenSoda);
+                UserInterface.EndMessage(chosenSoda.Name, 0);
             }
             else if (paymentValue > chosenSoda.Price)
             {
                 DepositCoinsIntoRegister(payment);
                 double changeValue = DetermineChange(paymentValue, chosenSoda.Price);
                 List<Coin> changeToReturn = GatherChange(changeValue);
+                UserInterface.EndMessage(chosenSoda.Name, changeValue);
                 if(changeToReturn == null)
                 {
                     customer.AddCoinsIntoWallet(payment);
@@ -133,6 +135,7 @@ namespace SodaMachine
                 else
                 {
                 customer.AddCoinsIntoWallet(changeToReturn);
+                  
                 customer.AddCanToBackpack(chosenSoda);
                 }
             }
